@@ -453,7 +453,7 @@ footer a{color:#d8cfc6}
   els.forEach(function(e){ io.observe(e); });
 })();
 </script>
-<!-- GoatCounter: analítica sin cookies (visitas + clics en WhatsApp) -->
+<!-- GoatCounter: analítica sin cookies (visitas + eventos de clic) -->
 <script data-goatcounter="https://mp-timeless.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script>
 (function(){
@@ -461,10 +461,26 @@ footer a{color:#d8cfc6}
     try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: path, title: title, event: true }); } catch(e){}
   }
   window.mpGC = gc;
+  function slug(t){ return (t||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40); }
+  function where(el){
+    return el.closest("header") ? "cabecera" : el.closest(".hero") ? "portada" : el.closest("#promo") ? "promo"
+         : el.closest("#centros") ? "reservas" : el.closest(".mcta") ? "boton-movil" : el.closest("footer") ? "pie"
+         : el.closest(".faq") ? "faq" : el.closest(".ck-banner") ? "banner-cookies" : "otro";
+  }
   document.addEventListener("click", function(e){
-    var a = e.target.closest && e.target.closest("a.wa"); if (!a) return;
-    var where = a.closest("header") ? "cabecera" : a.closest(".hero") ? "portada" : a.closest("#promo") ? "promo" : a.closest("#centros") ? "reservas" : a.closest(".mcta") ? "boton-movil" : "otro";
-    gc("whatsapp-" + where, "Clic WhatsApp (" + where + ")");
+    var t = e.target; if (!t.closest) return;
+    // Preguntas frecuentes: qué pregunta se abre
+    var sum = t.closest(".faq summary");
+    if (sum) { if (!sum.parentNode.open) gc("faq-" + slug(sum.textContent), "FAQ abierta: " + sum.textContent.trim()); return; }
+    var a = t.closest("a, button"); if (!a) return;
+    var w = where(a), href = a.getAttribute("href") || "", label = (a.textContent || "").trim().replace(/\s+/g," ");
+    if (a.classList.contains("wa"))            gc("whatsapp-" + w, "Clic WhatsApp (" + w + ")");
+    else if (href.indexOf("tel:") === 0)       gc("telefono-" + w, "Clic teléfono (" + w + ")");
+    else if (href.indexOf("mailto:") === 0)    gc("email-" + w, "Clic email (" + w + ")");
+    else if (href.indexOf("politica-cookies") > -1) gc("politica-cookies-" + w, "Abre política de cookies (" + w + ")");
+    else if (href.charAt(0) === "#" && href.length > 1) gc("ir-" + href.slice(1) + "-" + w, "Botón «" + label + "» → " + href + " (" + w + ")");
+    else if (/^https?:/.test(href))            gc("enlace-externo-" + slug(href.replace(/^https?:\/\/(www\.)?/,"")), "Enlace externo: " + href);
+    else if (a.classList.contains("ck-link"))  gc("configurar-cookies-" + w, "Reabre configuración de cookies (" + w + ")");
   }, true);
 })();
 </script>
