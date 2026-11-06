@@ -431,7 +431,7 @@ footer a{color:#d8cfc6}
 <footer>
   <div class="wrap">
     <span>© 2026 Maria Padilla · Estética de vanguardia · Promoción hasta agotar existencias · *1 promo por clienta</span>
-    <span>Cosmética profesional Dr. Grandel · <a href="https://www.mariapadilla.es">mariapadilla.es</a></span>
+    <span><a href="politica-cookies.html">Política de cookies</a> · <button class="ck-link" onclick="mpOpenCookies()">Configurar cookies</button> · <a href="https://www.mariapadilla.es">mariapadilla.es</a></span>
   </div>
 </footer>
 
@@ -453,6 +453,103 @@ footer a{color:#d8cfc6}
   els.forEach(function(e){ io.observe(e); });
 })();
 </script>
+<!-- ===== Consentimiento de cookies + Píxel de Meta ===== -->
+<style>
+.ck-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:100;max-width:760px;margin:0 auto;background:#fff;border-radius:20px;box-shadow:0 24px 60px -20px rgba(40,25,10,.45);padding:22px 24px;font-family:Montserrat,system-ui,sans-serif;color:#4A4440;display:none}
+.ck-banner.show{display:block;animation:ckUp .35s ease}
+@keyframes ckUp{from{transform:translateY(20px);opacity:0}to{transform:none;opacity:1}}
+.ck-banner h4{font-family:"Playfair Display",Georgia,serif;font-size:20px;color:#5A3820;margin-bottom:6px}
+.ck-banner p{font-size:14px;line-height:1.55}
+.ck-banner p a{color:#E0841C;font-weight:600}
+.ck-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.ck-btn{flex:1 1 150px;border:0;border-radius:999px;padding:12px 18px;font:600 14px Montserrat,sans-serif;cursor:pointer}
+.ck-accept{background:linear-gradient(135deg,#F0A03A,#E0841C);color:#fff}
+.ck-reject{background:#2f2a26;color:#fff}
+.ck-config{background:#fff;color:#5A3820;border:1.5px solid #d8c7b3}
+.ck-panel{display:none;margin-top:16px;border-top:1px solid #eee;padding-top:14px}
+.ck-panel.show{display:block}
+.ck-row{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #f2ebe2}
+.ck-row b{display:block;color:#5A3820;font-size:14px}
+.ck-row span{font-size:13px;color:#7D746C}
+.ck-switch{position:relative;width:46px;height:26px;flex:none}
+.ck-switch input{opacity:0;width:0;height:0}
+.ck-slider{position:absolute;inset:0;background:#d6cfc7;border-radius:999px;transition:.2s;cursor:pointer}
+.ck-slider::before{content:"";position:absolute;width:20px;height:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}
+.ck-switch input:checked+.ck-slider{background:#E0841C}
+.ck-switch input:checked+.ck-slider::before{transform:translateX(20px)}
+.ck-switch input:disabled+.ck-slider{opacity:.55;cursor:not-allowed}
+.ck-save{margin-top:14px;width:100%}
+.ck-link{background:none;border:0;color:#d8cfc6;text-decoration:underline;cursor:pointer;font:inherit;padding:0}
+@media (max-width:600px){.ck-banner{left:10px;right:10px;bottom:10px;padding:18px}}
+</style>
+
+<div class="ck-banner" id="ckBanner" role="dialog" aria-live="polite" aria-label="Preferencias de cookies">
+  <h4>Tu privacidad, a tu elección</h4>
+  <p>Usamos cookies propias necesarias para que la web funcione y, solo si nos das permiso, cookies de Meta (Facebook e Instagram) para medir nuestras campañas y mostrarte anuncios relevantes. Puedes aceptarlas, rechazarlas o elegir. Más información en la <a href="politica-cookies.html">política de cookies</a>.</p>
+  <div class="ck-actions">
+    <button class="ck-btn ck-reject" data-ck="reject">Rechazar</button>
+    <button class="ck-btn ck-config" data-ck="config">Configurar</button>
+    <button class="ck-btn ck-accept" data-ck="accept">Aceptar</button>
+  </div>
+  <div class="ck-panel" id="ckPanel">
+    <div class="ck-row"><div><b>Técnicas (necesarias)</b><span>Guardan tu elección sobre cookies. Siempre activas.</span></div>
+      <label class="ck-switch"><input type="checkbox" checked disabled><span class="ck-slider"></span></label></div>
+    <div class="ck-row"><div><b>Publicidad (Meta)</b><span>Píxel de Meta: mide visitas y clics de nuestras campañas en Facebook e Instagram y permite personalizar anuncios.</span></div>
+      <label class="ck-switch"><input type="checkbox" id="ckAds"><span class="ck-slider"></span></label></div>
+    <button class="ck-btn ck-accept ck-save" data-ck="save">Guardar mi elección</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var PIXEL_ID = "1567509476848348";          // ← aquí irá el ID del píxel de Meta
+  var KEY = "mp_consent_v1";   // cookie técnica: guarda la elección (6 meses)
+  var MAX_AGE = 60*60*24*180;
+  var PROMO = { value: 115, currency: "EUR", content_name: "Timeless Antiage Pro" };
+
+  var banner = document.getElementById("ckBanner"), panel = document.getElementById("ckPanel"), ads = document.getElementById("ckAds");
+  var pixelLoaded = false;
+
+  function read(){ try{ var m = document.cookie.match(new RegExp("(?:^|; )"+KEY+"=([^;]*)")); return m ? JSON.parse(decodeURIComponent(m[1])) : null; }catch(e){ return null; } }
+  function write(v){ try{ document.cookie = KEY+"="+encodeURIComponent(JSON.stringify(v))+"; max-age="+MAX_AGE+"; path=/; SameSite=Lax"; }catch(e){} mem = v; }
+  var mem = read();
+
+  function loadPixel(){
+    if (pixelLoaded) return; pixelLoaded = true;
+    if (!PIXEL_ID) { demo(); return; }   // vista previa: sin ID no se carga nada
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', PIXEL_ID); fbq('track', 'PageView'); demo();
+  }
+
+  function apply(c){ banner.classList.remove("show"); panel.classList.remove("show"); if (c && c.ads) loadPixel(); demo(); }
+  function choose(adsOn, how){ var c = { ads: !!adsOn, date: new Date().toISOString() }; write(c); apply(c); if (window.mpGC) window.mpGC(adsOn ? "cookies-aceptar" : "cookies-rechazar", "Cookies: " + (adsOn ? "acepta" : "rechaza") + " (" + how + ")"); }
+
+  banner.addEventListener("click", function(e){
+    var a = e.target.getAttribute("data-ck"); if(!a) return;
+    if (a === "accept") choose(true, "botón aceptar");
+    if (a === "reject") choose(false, "botón rechazar");
+    if (a === "config") { ads.checked = !!(mem && mem.ads); panel.classList.toggle("show"); }
+    if (a === "save") choose(ads.checked, "configurar");
+  });
+
+  // Reabrir el banner desde el pie ("Configurar cookies")
+  window.mpOpenCookies = function(){ ads.checked = !!(mem && mem.ads); banner.classList.add("show"); };
+
+  // Evento de carrito al pulsar cualquier botón de WhatsApp (solo con consentimiento)
+  document.addEventListener("click", function(e){
+    var a = e.target.closest && e.target.closest("a.wa"); if(!a) return;
+    if (mem && mem.ads && window.fbq) fbq('track', 'AddToCart', PROMO);
+    demoClick();
+  }, true);
+
+  function demo(){}
+  function demoClick(){}
+
+  if (mem) apply(mem); else { banner.classList.add("show"); demo(); }
+})();
+</script>
+<!-- ===== Fin consentimiento ===== -->
+
 <!-- GoatCounter: analítica sin cookies (visitas + eventos de clic) -->
 <script data-goatcounter="https://mp-timeless.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script>
