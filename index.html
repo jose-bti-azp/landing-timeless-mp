@@ -453,5 +453,21 @@ footer a{color:#d8cfc6}
   els.forEach(function(e){ io.observe(e); });
 })();
 </script>
+<!-- GoatCounter: analítica sin cookies (visitas + clics en WhatsApp) -->
+<script data-goatcounter="https://mp-timeless.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script>
+(function(){
+  function gc(path, title){
+    try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: path, title: title, event: true }); } catch(e){}
+  }
+  window.mpGC = gc;
+  document.addEventListener("click", function(e){
+    var a = e.target.closest && e.target.closest("a.wa"); if (!a) return;
+    var where = a.closest("header") ? "cabecera" : a.closest(".hero") ? "portada" : a.closest("#promo") ? "promo" : a.closest("#centros") ? "reservas" : a.closest(".mcta") ? "boton-movil" : "otro";
+    gc("whatsapp-" + where, "Clic WhatsApp (" + where + ")");
+  }, true);
+})();
+</script>
+
 </body>
 </html>
