@@ -108,8 +108,23 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,246,239,.9);backdrop
 /* Promo */
 .promo{background:radial-gradient(900px 500px at 20% 100%,rgba(217,164,65,.35),transparent 60%),linear-gradient(180deg,#F3E3C8,#E9CFA3);position:relative}
 .promo-card{display:grid;grid-template-columns:.85fr 1.15fr;gap:0;margin-top:46px;background:#fff;border-radius:32px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(90,56,32,.6)}
-.promo-media{background:linear-gradient(160deg,#F6EBDA,#E3C48E);display:grid;place-items:center;padding:40px}
-.promo-media img{width:100%;max-width:340px;filter:drop-shadow(0 30px 30px rgba(40,60,40,.35))}
+.promo-media{background:linear-gradient(160deg,#F6EBDA,#E3C48E);display:grid;place-items:center;padding:48px 36px}
+.combo{position:relative;width:100%;max-width:420px;padding:0 0 70px}
+.combo-pack{width:72%;filter:drop-shadow(0 30px 30px rgba(40,60,40,.35))}
+.combo-gift{position:absolute;right:0;bottom:0;width:58%;aspect-ratio:1/1;margin:0}
+.combo-gift img{width:100%;height:100%;object-fit:cover;object-position:center;border-radius:50%;border:7px solid #fff;box-shadow:0 24px 40px -18px rgba(90,56,32,.6)}
+.combo-gift figcaption{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);background:#D7262E;color:#fff;border-radius:999px;padding:8px 18px;text-align:center;white-space:nowrap;font-size:12px;letter-spacing:.06em;box-shadow:0 10px 20px -8px rgba(215,38,46,.6);line-height:1.2}
+.combo-gift figcaption b{display:block;font-size:15px;letter-spacing:.16em;text-transform:uppercase}
+.combo-plus{position:absolute;left:33%;top:60%;width:52px;height:52px;border-radius:50%;background:#D7262E;color:#fff;font-size:34px;font-weight:300;display:grid;place-items:center;line-height:1;z-index:2;border:4px solid #fff;box-shadow:0 10px 20px -8px rgba(0,0,0,.4)}
+.promo-block{border:1px solid #efe3d1;border-radius:18px;padding:16px 20px;display:grid;gap:6px}
+.gift-block{background:#FFF7EC;border-color:#F2D2A6}
+.blk-k{font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-d)}
+.blk-t{font-family:"Playfair Display",serif;font-size:24px;color:#4A3020;line-height:1.2}
+.blk-d{font-size:14.5px;color:var(--muted)}
+.promo-block .promo-list{margin-top:4px}
+.stock{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;background:#2f2a26;color:#fff;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:8px 16px;border-radius:999px}
+.stock .dot{width:9px;height:9px;border-radius:50%;background:#FF4D4D;box-shadow:0 0 0 0 rgba(255,77,77,.7);animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,77,77,.7)}70%{box-shadow:0 0 0 10px rgba(255,77,77,0)}100%{box-shadow:0 0 0 0 rgba(255,77,77,0)}}
 .promo-body{padding:46px 48px;display:flex;flex-direction:column;gap:18px}
 .promo-title{font-family:"Playfair Display",serif;font-style:italic;font-weight:700;font-size:clamp(40px,5vw,58px);color:#4A3020;line-height:1}
 .promo-sub{color:var(--muted);font-size:15px}
@@ -119,8 +134,8 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,246,239,.9);backdrop
 .promo-list b{display:block;color:var(--brown)}
 .promo-list span{font-size:14.5px;color:var(--muted)}
 .gift{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.gift-tag{background:#D7262E;color:#fff;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:7px 16px;font-size:15px}
-.gift b{font-family:"Playfair Display",serif;font-size:24px;color:#4A3020}
+.gift-tag{background:#D7262E;color:#fff;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;font-size:13px}
+.gift{gap:12px}
 .promo-price{display:flex;align-items:center;gap:30px;flex-wrap:wrap;margin-top:6px}
 .disc{width:150px;height:150px;border-radius:50%;background:#fff;box-shadow:0 14px 34px -12px rgba(90,56,32,.45);border:1px solid #f0e4d2;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none}
 .disc .now{font-family:"Playfair Display",serif;font-style:italic;font-weight:700;font-size:50px;color:#2f2a26;line-height:1}
@@ -204,7 +219,7 @@ footer a{color:#d8cfc6}
   .mcta .btn{width:100%;justify-content:center}
   footer{padding-bottom:90px}
 }
-@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}.btn{transition:none}}
+@media (prefers-reduced-motion:reduce){.stock .dot{animation:none}.js .rv{opacity:1;transform:none;transition:none}.btn{transition:none}}
 </style>
 </head>
 <body>
@@ -231,7 +246,7 @@ footer a{color:#d8cfc6}
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="rv">
-      <a class="promo-pill" href="#promo"><span>Promo</span>1 sesión Timeless Ultrawaves de regalo →</a>
+      <a class="promo-pill" href="#promo"><span>Promo</span>Sesión Timeless Ultrawaves de regalo · Hasta agotar existencias →</a>
       <h1>TIMELESS</h1>
       <p class="tag">El poder de <em>detener el tiempo</em></p>
       <p class="lead">Combinamos la tecnología de ondas de choque Ultrawaves HD con la acción renovadora de Timeless para devolver a tu piel firmeza, luminosidad y un aspecto más uniforme.</p>
@@ -315,15 +330,32 @@ footer a{color:#d8cfc6}
       <h2 class="rv">Lujo que transforma, <em>belleza que perdura</em></h2>
     </div>
     <div class="promo-card rv">
-      <div class="promo-media"><img src="img/pack.jpg" alt="Estuche Timeless Antiage Pro de Dr. Grandel con Revitalizing Cream y Eye & Lip"></div>
+      <div class="promo-media">
+        <div class="combo">
+          <img class="combo-pack" src="img/pack.jpg" alt="Estuche Timeless Antiage Pro de Dr. Grandel con Revitalizing Cream y Eye & Lip">
+          <span class="combo-plus" aria-hidden="true">+</span>
+          <figure class="combo-gift">
+            <img src="img/sesion-round.jpg" alt="Sesión de Timeless Ultrawaves en cabina">
+            <figcaption><b>Regalo</b>Sesión en cabina</figcaption>
+          </figure>
+        </div>
+      </div>
       <div class="promo-body">
         <h3 class="promo-title">Timeless<br>Antiage Pro</h3>
-        <p class="promo-sub">El estuche de cuidado en casa de Dr. Grandel:</p>
-        <ul class="promo-list">
-          <li><b>Timeless Revitalizing Cream</b><span>Crema antiedad 24 h con yemas de haya, ceramidas y escualano. Alisa, fortalece y protege de la pérdida de hidratación.</span></li>
-          <li><b>Timeless Eye &amp; Lip</b><span>Cuidado reafirmante para contorno de ojos y labios. Reduce visiblemente ojeras e hinchazón.</span></li>
-        </ul>
-        <div class="gift"><span class="gift-tag">De regalo</span><b>1 sesión Timeless Ultrawaves</b></div>
+        <p class="promo-sub">Tu tratamiento en cabina y tu cuidado en casa, en una sola promoción.</p>
+        <div class="promo-block gift-block">
+          <div class="gift"><span class="gift-tag">De regalo</span><span class="blk-k">En cabina</span></div>
+          <b class="blk-t">1 sesión Timeless Ultrawaves</b>
+          <span class="blk-d">Tratamiento facial con tecnología Ultrawaves HD y cosmética profesional Timeless, en tu centro Maria Padilla. Resultados desde la primera sesión.</span>
+        </div>
+        <div class="promo-block">
+          <span class="blk-k">En casa · Estuche Dr. Grandel</span>
+          <ul class="promo-list">
+            <li><b>Timeless Revitalizing Cream</b><span>Crema antiedad 24 h que alisa, fortalece y protege de la pérdida de hidratación.</span></li>
+            <li><b>Timeless Eye &amp; Lip</b><span>Reafirma el contorno de ojos y labios y reduce visiblemente ojeras e hinchazón.</span></li>
+          </ul>
+        </div>
+        <div class="stock"><span class="dot" aria-hidden="true"></span>Hasta agotar existencias</div>
         <div class="promo-price">
           <div class="disc"><span class="now">115€</span><span class="before">antes <s>356€</s></span></div>
           <div class="promo-cta">
@@ -331,7 +363,7 @@ footer a{color:#d8cfc6}
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.7-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3Z"/></svg>
               Quiero mi promoción
             </a>
-            <span class="save">Ahorras 241€ · *1 promo por clienta</span>
+            <span class="save">Ahorras 241€ · Hasta agotar existencias · *1 promo por clienta</span>
           </div>
         </div>
       </div>
@@ -359,10 +391,10 @@ footer a{color:#d8cfc6}
   <div class="wrap">
     <div class="center"><span class="eyebrow rv">Preguntas frecuentes</span><h2 class="rv">Resolvemos <em>tus dudas</em></h2></div>
     <div class="faq rv">
-      <details><summary>¿Qué incluye la promoción?</summary><p>El estuche Timeless Antiage Pro de Dr. Grandel (Timeless Revitalizing Cream y Timeless Eye &amp; Lip) y, de regalo, una sesión de Timeless Ultrawaves en cabina. Todo por 115€ (antes 356€).</p></details>
+      <details><summary>¿Qué incluye la promoción?</summary><p>El estuche Timeless Antiage Pro de Dr. Grandel (Timeless Revitalizing Cream y Timeless Eye &amp; Lip) y, de regalo, una sesión de Timeless Ultrawaves en cabina. Todo por 115€ (antes 356€), hasta agotar existencias.</p></details>
       <details><summary>¿Para quién está pensado Timeless?</summary><p>Para pieles maduras con pérdida de firmeza, falta de luminosidad, poros visibles, manchas o irregularidades. Lo que decide no es la edad, sino el estado de tu piel.</p></details>
       <details><summary>¿Cuándo se notan los resultados?</summary><p>Timeless Ultrawaves es un método no invasivo con resultados desde la primera sesión. Con la rutina en casa, el resultado se mantiene y se potencia.</p></details>
-      <details><summary>¿Puedo disfrutar la promoción más de una vez?</summary><p>No, la promoción está limitada a una por clienta.</p></details>
+      <details><summary>¿Puedo disfrutar la promoción más de una vez?</summary><p>No, la promoción está limitada a una por clienta y es válida hasta agotar existencias.</p></details>
       <details><summary>¿Dónde puedo hacerme la sesión?</summary><p>En cualquiera de nuestros centros de Barcelona (Balmes, Gran Via Carles III, Muntaner y Riera de Cassoles) y Sabadell (Corominas).</p></details>
     </div>
   </div>
@@ -382,7 +414,7 @@ footer a{color:#d8cfc6}
     </div>
     <div class="reserve rv">
       <h3>Central de reservas</h3>
-      <p>Timeless Antiage Pro + 1 sesión Timeless Ultrawaves de regalo por <b>115€</b>.</p>
+      <p>Timeless Antiage Pro + 1 sesión Timeless Ultrawaves de regalo por <b>115€</b>. Hasta agotar existencias.</p>
       <a class="btn btn-primary wa" data-msg="Hola, quiero la promoción Timeless Antiage Pro (115€) con la sesión Timeless Ultrawaves de regalo." href="#">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.7-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3Z"/></svg>
         Reservar por WhatsApp
@@ -398,7 +430,7 @@ footer a{color:#d8cfc6}
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Maria Padilla · Estética de vanguardia · *1 promo por clienta</span>
+    <span>© 2026 Maria Padilla · Estética de vanguardia · Promoción hasta agotar existencias · *1 promo por clienta</span>
     <span>Cosmética profesional Dr. Grandel · <a href="https://www.mariapadilla.es">mariapadilla.es</a></span>
   </div>
 </footer>
