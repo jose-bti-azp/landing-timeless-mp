@@ -558,6 +558,15 @@ footer a{color:#d8cfc6}
     try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: path, title: title, event: true }); } catch(e){}
   }
   window.mpGC = gc;
+  // Origen de la visita (UTM): se guarda solo en memoria mientras la página está abierta, sin cookies
+  var q = new URLSearchParams(location.search);
+  var src = (q.get("utm_source")||"").toLowerCase().replace(/[^a-z0-9-]/g,"");
+  var cnt = (q.get("utm_content")||"").toLowerCase().replace(/[^a-z0-9-]/g,"");
+  var origen = src ? src + (cnt ? "-" + cnt : "") : "";
+  if (origen) {
+    var t0 = setInterval(function(){ if (window.goatcounter && window.goatcounter.count){ clearInterval(t0); gc("llegada-" + origen, "Llegada desde " + origen); } }, 300);
+    setTimeout(function(){ clearInterval(t0); }, 10000);
+  }
   function slug(t){ return (t||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40); }
   function where(el){
     return el.closest("header") ? "cabecera" : el.closest(".hero") ? "portada" : el.closest("#promo") ? "promo"
@@ -571,7 +580,10 @@ footer a{color:#d8cfc6}
     if (sum) { if (!sum.parentNode.open) gc("faq-" + slug(sum.textContent), "FAQ abierta: " + sum.textContent.trim()); return; }
     var a = t.closest("a, button"); if (!a) return;
     var w = where(a), href = a.getAttribute("href") || "", label = (a.textContent || "").trim().replace(/\s+/g," ");
-    if (a.classList.contains("wa"))            gc("whatsapp-" + w, "Clic WhatsApp (" + w + ")");
+    if (a.classList.contains("wa")) {
+      gc("whatsapp-" + w, "Clic WhatsApp (" + w + ")");
+      if (origen) gc("contacto-" + origen, "Clic WhatsApp desde " + origen);
+    }
     else if (href.indexOf("tel:") === 0)       gc("telefono-" + w, "Clic teléfono (" + w + ")");
     else if (href.indexOf("mailto:") === 0)    gc("email-" + w, "Clic email (" + w + ")");
     else if (href.indexOf("politica-cookies") > -1) gc("politica-cookies-" + w, "Abre política de cookies (" + w + ")");
