@@ -485,5 +485,34 @@ footer a{color:#d8cfc6}
 })();
 </script>
 
+<script>
+(function(){
+  // Zonas vistas al hacer scroll (una vez por visita): cuenta cuando el inicio de la zona supera el 60% de la pantalla
+  var zonas = [
+    [".solutions",   "zona-1-soluciones",  "Ve: cinco soluciones"],
+    [".science",     "zona-2-ciencia",     "Ve: la ciencia de Timeless"],
+    ["#sesion",      "zona-3-sesion",      "Ve: la sesión en cabina"],
+    ["#promo",       "zona-4-promo",       "Ve: la promoción"],
+    [".promo-price", "zona-5-precio",      "Ve: el precio y el botón de la promo"],
+    [".faq",         "zona-6-faq",         "Ve: preguntas frecuentes"],
+    ["#centros",     "zona-7-centros",     "Ve: centros y reservas"]
+  ];
+  if (!("IntersectionObserver" in window)) return;
+  var vistos = {};
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (!en.isIntersecting) return;
+      var z = en.target.__zona; if (!z || vistos[z[1]]) return;
+      vistos[z[1]] = true; io.unobserve(en.target);
+      if (window.mpGC) window.mpGC(z[1], z[2]);
+    });
+  }, { threshold: 0, rootMargin: "0px 0px -40% 0px" });
+  zonas.forEach(function(z){
+    var el = document.querySelector(z[0]); if (!el) return;
+    el.__zona = z;
+    io.observe(el);
+  });
+})();
+</script>
 </body>
 </html>
