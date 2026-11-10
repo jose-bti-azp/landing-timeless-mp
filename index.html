@@ -111,15 +111,16 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,246,239,.9);backdrop
 .session-grid p{font-size:15px}
 /* Promo */
 .promo{background:radial-gradient(900px 500px at 20% 100%,rgba(217,164,65,.35),transparent 60%),linear-gradient(180deg,#F3E3C8,#E9CFA3);position:relative}
-.promo-card{display:grid;grid-template-columns:.85fr 1.15fr;gap:0;margin-top:46px;background:#fff;border-radius:32px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(90,56,32,.6)}
-.promo-media{background:linear-gradient(160deg,#F6EBDA,#E3C48E);display:grid;place-items:center;padding:48px 36px}
-.combo{position:relative;width:100%;max-width:420px;padding:0 0 70px}
-.combo-pack{width:72%;border-radius:20px;box-shadow:0 26px 44px -22px rgba(60,40,20,.55)}
-.combo-gift{position:absolute;right:0;bottom:0;width:58%;aspect-ratio:1/1;margin:0}
-.combo-gift img{width:100%;height:100%;object-fit:cover;object-position:center;border-radius:50%;border:7px solid #fff;box-shadow:0 24px 40px -18px rgba(90,56,32,.6)}
-.combo-gift figcaption{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);background:#D7262E;color:#fff;border-radius:999px;padding:8px 18px;text-align:center;white-space:nowrap;font-size:12px;letter-spacing:.06em;box-shadow:0 10px 20px -8px rgba(215,38,46,.6);line-height:1.2}
-.combo-gift figcaption b{display:block;font-size:15px;letter-spacing:.16em;text-transform:uppercase}
-.combo-plus{position:absolute;left:33%;top:60%;width:52px;height:52px;border-radius:50%;background:#D7262E;color:#fff;font-size:34px;font-weight:300;display:grid;place-items:center;line-height:1;z-index:2;border:4px solid #fff;box-shadow:0 10px 20px -8px rgba(0,0,0,.4)}
+.promo-card{margin-top:46px;background:#fff;border-radius:32px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(90,56,32,.6)}
+.promo-photo{position:relative;height:500px;overflow:hidden}
+.promo-photo img{width:100%;height:100%;object-fit:cover;object-position:62% 22%}
+.promo-photo::after{content:"";position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(0deg,rgba(243,227,200,.55),rgba(243,227,200,0))}
+.photo-tag{position:absolute;right:32px;bottom:32px;z-index:2;display:flex;align-items:center;gap:0;box-shadow:0 14px 30px -12px rgba(0,0,0,.45)}
+.photo-tag span{background:#D7262E;color:#fff;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:12px 16px}
+.photo-tag b{background:#fff;color:#4A3020;font-family:"Playfair Display",serif;font-size:19px;padding:9px 18px}
+.promo-lower{display:grid;grid-template-columns:.85fr 1.15fr}
+.promo-media{background:linear-gradient(170deg,#F3E3C8,#E3C48E);display:flex;justify-content:center;align-items:flex-start;padding:0 36px 44px}
+.promo-pack{position:relative;z-index:3;width:100%;max-width:360px;margin-top:-190px;border-radius:22px;box-shadow:0 34px 60px -26px rgba(60,40,20,.65)}
 .promo-block{border:1px solid #efe3d1;border-radius:18px;padding:16px 20px;display:grid;gap:6px}
 .gift-block{background:#FFF7EC;border-color:#F2D2A6}
 .blk-k{font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-d)}
@@ -148,7 +149,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,246,239,.9);backdrop
 .promo-cta{display:flex;flex-direction:column;gap:10px;flex:1;min-width:220px}
 .btn-lg{padding:18px 30px;font-size:16px;justify-content:center}
 .promo-cta .save{font-size:13px;color:var(--muted);text-align:center}
-@media (max-width:980px){.promo-card{grid-template-columns:1fr}.session-grid{grid-template-columns:1fr}.session-hero img{height:320px}.promo-body{padding:34px 26px}}
+@media (max-width:980px){.promo-lower{grid-template-columns:1fr}.promo-photo{height:320px}.promo-photo img{object-position:70% 25%}.promo-pack{max-width:230px;margin-top:-70px}.photo-tag{left:12px;right:auto;bottom:auto;top:12px}.photo-tag span{font-size:10px;padding:8px 9px}.photo-tag b{font-size:13px;padding:6px 10px;white-space:nowrap}.session-grid{grid-template-columns:1fr}.session-hero img{height:320px}.promo-body{padding:34px 26px}}
 @media (max-width:600px){.promo-price{justify-content:center}.session-over{padding:40px 22px 24px}.steps{grid-template-columns:1fr}}
 
 /* ===== Testimonios ===== */
@@ -392,15 +393,13 @@ footer a{color:#d8cfc6}
       <h2 class="rv">Lujo que transforma, <em>belleza que perdura</em></h2>
     </div>
     <div class="promo-card rv">
+      <div class="promo-photo">
+        <img src="img/cabina-promo.jpg" alt="Clienta recibiendo una sesión de Timeless Ultrawaves en cabina">
+        <div class="photo-tag"><span>De regalo</span><b>1 sesión Timeless Ultrawaves en cabina</b></div>
+      </div>
+      <div class="promo-lower">
       <div class="promo-media">
-        <div class="combo">
-          <img class="combo-pack" src="img/pack.jpg" alt="Estuche Timeless Antiage Pro de Dr. Grandel con Revitalizing Cream y Eye & Lip">
-          <span class="combo-plus" aria-hidden="true">+</span>
-          <figure class="combo-gift">
-            <img src="img/sesion-round-v2.jpg" alt="Sesión de Timeless Ultrawaves en cabina">
-            <figcaption><b>Regalo</b>Sesión en cabina</figcaption>
-          </figure>
-        </div>
+          <img class="promo-pack" src="img/pack.jpg" alt="Estuche Timeless Antiage Pro de Dr. Grandel con Revitalizing Cream y Eye & Lip">
       </div>
       <div class="promo-body">
         <h3 class="promo-title">Timeless<br>Antiage Pro</h3>
@@ -428,6 +427,7 @@ footer a{color:#d8cfc6}
             <span class="save">Ahorras 241€ · Hasta agotar existencias · *1 promo por clienta</span>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </div>
