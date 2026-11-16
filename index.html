@@ -738,7 +738,16 @@ footer a{color:#d8cfc6}
   function gcEvent(path, title){
     var tries = 0, t = setInterval(function(){ tries++; if (window.mpGC && window.goatcounter && window.goatcounter.count){ clearInterval(t); window.mpGC(path, title); } else if (tries > 30) clearInterval(t); }, 300);
   }
-  var initial = (new URLSearchParams(location.search).get("lang") || "").toLowerCase() === "ca" ? "ca" : "es";
+  // Catalán si: ?lang=ca, un parámetro mal montado que acabe en "lang" (p. ej. URL pegada en Meta),
+  // una campaña "-cat" o un anuncio "ca-…"
+  function wantsCa(){
+    var q = new URLSearchParams(location.search), ca = false;
+    q.forEach(function(v, k){ if (/(^|[?&\/])lang$/i.test(k) && /^ca/i.test(v)) ca = true; });
+    if (/-cat$/i.test(q.get("utm_campaign") || "")) ca = true;
+    if (/^ca-/i.test(q.get("utm_content") || "")) ca = true;
+    return ca;
+  }
+  var initial = wantsCa() ? "ca" : "es";
   if (initial === "ca") { apply("ca"); gcEvent("idioma-ca", "Visita en catalán"); } else apply("es");
   document.addEventListener("click", function(e){
     var b = e.target.closest && e.target.closest(".lang-switch button"); if (!b) return;
